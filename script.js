@@ -26,16 +26,34 @@ submitGridButton.addEventListener('click', (e) => {
 
 
    const sketchDivs = document.querySelectorAll('.sketch-div');
-   sketchDivs.forEach(div => div.addEventListener('mouseover', (e) => {
-      console.log('cos niecos')
-      div.style.backgroundColor = "black";
+
+   let mouseClickedDown = false;
+   sketchDivs.forEach(div => div.addEventListener("mousedown", (e) => {
+
+      mouseClickedDown = true;
+      console.log("wcisniete");
+      sketchDivs.forEach(div => div.addEventListener("mousemove", (e) =>  {
+         if ( mouseClickedDown == true) {
+         div.style.backgroundColor = "black";
+         } else {
+            return;
+         }
+      }))
+      sketchDivs.forEach(div => div.addEventListener("mouseup", (e) => {
+         mouseClickedDown = false;
+      }))
    }))
+
+   // sketchDivs.forEach(div => div.addEventListener('mousemove', (e) => {
+   //    console.log('cos niecos')
+   //    div.style.backgroundColor = "black";
+   // }))
 })
 
 function createDivs (numberOfDivs) {
 
 }
-sketchDivs.forEach(div => div.addEventListener('mouseover', (e) => {
-   console.log('cos niecos')
-   div.style.backgroundColor = "black";
-}))
+// sketchDivs.forEach(div => div.addEventListener('mouseover', (e) => {
+//    console.log('cos niecos')
+//    div.style.backgroundColor = "black";
+// }))
