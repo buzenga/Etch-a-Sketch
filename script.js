@@ -8,10 +8,11 @@ const grayButton = document.querySelector('.gray');
 const rainbowButton = document.querySelector('.rainbow');
 const clearButton = document.querySelector('.clear');
 
-const clicked = document.querySelector(".clicked");
 
 let numberOfDivs = 16;
 let mouseClickedDown = false;
+let mode = '';
+let color = '';
 
 
 slider.addEventListener("change", (e) => {
@@ -19,43 +20,27 @@ slider.addEventListener("change", (e) => {
    numberOfDivs = slider.value;
 })
 
-document.addEventListener('mousemove', (e) => {
-   clicked.innerText = mouseClickedDown;
-})
-//-----------------------------------------------
-window.addEventListener("mouseup", (e) => {
-   mouseClickedDown = false;
-   return;
-})
-//----------------------------------------------
-
 submitGridButton.addEventListener('click', (e) => {
-
+   color = 'black';
    createDivs(numberOfDivs);
-   blackpaint();
-   blackpaintTouch();
+   paint ();
+})
 
-   // const sketchDivs = document.querySelectorAll('.sketch-div');
-
-   // mouseClickedDown = false;
-   // sketchDivs.forEach(div => div.addEventListener("mousedown", (e) => {
-
-   //    mouseClickedDown = true;
-   //    console.log("wcisniete");
-
-   //    sketchDivs.forEach(div => div.addEventListener("mousemove", (e) =>  {
-         
-   //       if ( mouseClickedDown == true) {
-   //       div.style.backgroundColor = "black";
-   //       } 
-   //    }))
-   //    sketchDivs.forEach(div => document.addEventListener("mouseup", (e) => {
-   //       mouseClickedDown = false;
-   //    }))
-   // }))
-
-
-   mouseClickedDown = false;
+blackButton.addEventListener("click", () => {
+   mode = "black";
+   color = "black";
+})
+grayButton.addEventListener("click", () => {
+   mode = "gray";
+})
+rainbowButton.addEventListener("click", () => {
+   mode = "rainbow";
+})
+clearButton.addEventListener("click", () => {
+   const sketchDivs = document.querySelectorAll('.sketch-div');
+   sketchDivs.forEach(div => {
+      div.style.backgroundColor = '';
+   })
 })
 
 function createDivs (numberOfDivs) {
@@ -71,87 +56,52 @@ function createDivs (numberOfDivs) {
    divContainer.style.gridTemplateColumns = `repeat(${numberOfDivs}, 1fr)`;
    divContainer.style.gridTemplateRows = `repeat(${numberOfDivs}, 1fr)`;
 }
-
-const blackpaint = () => {
+const paint = () => {
    const sketchDivs = document.querySelectorAll('.sketch-div');
-   
    mouseClickedDown = false;
-   sketchDivs.forEach(div => div.addEventListener("mousedown", (e) => {
 
+   sketchDivs.forEach(div => div.addEventListener('mousedown', (e) => {
       mouseClickedDown = true;
-      div.style.backgroundColor = "black";
-
-      sketchDivs.forEach(div => div.addEventListener("mousemove", (e) =>  {
-         
-
-         if ( mouseClickedDown == true) {
-         div.style.backgroundColor = "black";
-         } else return;
-      }))
-      sketchDivs.forEach(div => window.addEventListener("mouseup", (e) => {
-         mouseClickedDown = false;
-         return;
-      }))
+      switch(mode) {
+         case 'gray':
+            let randomNumber = Math.floor(Math.random() * 255);
+            color = `rgb(${randomNumber},${randomNumber},${randomNumber})`
+            div.style.backgroundColor = color;
+            break;
+         case 'rainbow':
+            let randomNumberR = Math.floor(Math.random() * 255);
+            let randomNumberG = Math.floor(Math.random() * 255);
+            let randomNumberB = Math.floor(Math.random() * 255);
+            color = `rgb(${randomNumberR},${randomNumberG},${randomNumberB})`
+            div.style.backgroundColor = color;
+            break;
+         default:
+         div.style.backgroundColor = color;
+         break;
+      }
+   }))
+   window.addEventListener('mouseup', (e) => {
+      mouseClickedDown = false;
+   })
+   sketchDivs.forEach(div => div.addEventListener('mouseover', (e) => {
+      if (mouseClickedDown === true) {
+         switch(mode) {
+            case 'gray':
+               let randomNumber = Math.floor(Math.random() * 255);
+               color = `rgb(${randomNumber},${randomNumber},${randomNumber})`
+               div.style.backgroundColor = color;
+               break;
+            case 'rainbow':
+               let randomNumberR = Math.floor(Math.random() * 255);
+               let randomNumberG = Math.floor(Math.random() * 255);
+               let randomNumberB = Math.floor(Math.random() * 255);
+               color = `rgb(${randomNumberR},${randomNumberG},${randomNumberB})`
+               div.style.backgroundColor = color;
+               break;
+            default:
+            div.style.backgroundColor = color;
+            break;
+         }
+      } else return;
    }))
 }
-const blackpaintTouch = () => {
-   const sketchDivs = document.querySelectorAll('.sketch-div');
-   
-   mouseClickedDown = false;
-   sketchDivs.forEach(div => div.addEventListener("touchstart", (e) => {
-
-      mouseClickedDown = true;
-      div.style.backgroundColor = "black";
-
-      sketchDivs.forEach(div => div.addEventListener("touchmove", (e) =>  {
-         
-
-         if ( mouseClickedDown == true) {
-         div.style.backgroundColor = "black";
-         } else return;
-      }))
-      sketchDivs.forEach(div => window.addEventListener("touchend", (e) => {
-         mouseClickedDown = false;
-         return;
-      }))
-   }))
-}
-
-
-
-
-
-// const blackpaint = () => {
-// //    const sketchDivs = document.querySelectorAll('.sketch-div');
-   
-// //    mouseClickedDown = false;
-
-// //    divContainer.addEventListener("mousedown", () => {
-// //       mouseClickedDown = true;
-// //    })
-// //    window.addEventListener("mouseup", () => {
-// //       mouseClickedDown = false;
-// //    })
-// //    sketchDivs.forEach(div => div.addEventListener("mouseover", () => {
-// //       if (mouseClickedDown == true) {
-// //          div.style.backgroundColor = "pink";
-// //       }
-// //    }))
-
-//    sketchDivs.forEach(div => div.addEventListener("mousedown", (e) => {
-
-//       mouseClickedDown = true;
-
-//       sketchDivs.forEach(div => div.addEventListener("mousemove", (e) =>  {
-         
-
-//          if ( mouseClickedDown == true) {
-//          div.style.backgroundColor = "pink";
-//          } else return;
-//       }))
-//       sketchDivs.forEach(div => window.addEventListener("mouseup", (e) => {
-//          mouseClickedDown = false;
-//          return;
-//       }))
-//    }))
-// }
