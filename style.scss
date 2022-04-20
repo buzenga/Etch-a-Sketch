@@ -13,9 +13,10 @@ body {
    display: flex;
    flex-direction: column;
    align-items: center;
+   justify-content: center;
 }
 header {
-   font-size: 1.5em;
+   font-size: 3em;
 }
 .container {
    width: 550px;
@@ -36,6 +37,80 @@ header {
 }
 .sketch-div {
    // border: 1px solid black;
-   border: 1px solid black;
-  
+   // border: 1px solid black;
 }
+.player-info {
+   position:absolute;
+   display: initial;
+   align-self: center;
+   justify-self: center;
+   font-size: 2em;
+   font-weight: bold;
+   color: rgb(24, 89, 24);
+   opacity: 0.7;
+   z-index: 1000;
+}
+button {
+   appearance: none;
+   background: none;
+   border: none;
+   width: 5.2em;
+   height: 3em;
+   border-radius: 1.5em;
+   border: 2px solid white;
+   color: white;
+   font-weight: bold;
+ 
+   transition: all 0.3s ease-in-out;
+}
+button:hover {
+   transform: scale(1.15);
+}
+
+// .rainbow:hover {
+//    transform: scale(1.15);
+//    background-image: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+//    -webkit-background-clip: text;
+//    -webkit-text-fill-color: transparent;
+// }
+.rainbow-running {
+   background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+background-size: 200% 200%;
+
+-webkit-animation: rainbow 3s ease infinite;
+-z-animation: rainbow 3s ease infinite;
+-o-animation: rainbow 3s ease infinite;
+  animation: rainbow 3s ease infinite;
+}
+@keyframes rainbow { 
+   0%{background-position:0% 82%}
+   50%{background-position:100% 19%}
+   100%{background-position:0% 82%}
+}
+.gray {
+   transition: all 0.3s ease-in-out;
+}
+// .gray:hover {
+//    transform: scale(1.15);
+//    background-image: linear-gradient(124deg, #f8f5f5, #e0dfdf, #bdbaba, #4c4c4b, #363736, #383838, #222223, #1d1d1d, #121212);
+//    -webkit-background-clip: text;
+//    -webkit-text-fill-color: transparent;
+// }
+.gray-running {
+   background: linear-gradient(124deg, #f1f0f0, #dcdbdb, #9e9d9d, #4c4c4b, #363736, #383838, #222223, #1d1d1d, #121212);
+background-size: 200% 200%;
+
+-webkit-animation: gray-display 2.5s ease infinite;
+-z-animation: gray-display 2.5s ease infinite;
+-o-animation: gray-display 2.5s ease infinite;
+  animation: gray-display 2.5s ease infinite;
+}
+@keyframes gray-display { 
+   0%{background-position:0% 82%}
+   50%{background-position:100% 19%}
+   100%{background-position:0% 82%}
+}
+.black-running {
+   background-color: black;
+}
+
