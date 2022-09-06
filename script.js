@@ -18,6 +18,23 @@ let color = '';
 let readyToSketch = false;
 
 
+window.addEventListener("load", (e) => {
+   
+   color = 'black';
+   mode = 'black';
+   resetButtons();
+
+   createDivs(numberOfDivs);
+   readyToSketch = true;
+   paint ();
+   if (readyToSketch === true) {
+      playerInfo.innerText = "Feel free to sketch...";
+   }
+   
+})
+
+
+
 slider.addEventListener("change", (e) => {
    gridDisplay.innerText = slider.value;
    numberOfDivs = slider.value;
